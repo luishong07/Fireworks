@@ -1,6 +1,12 @@
 class Firework {
     constructor() {
-        this.firework = new Particle(random(innerWidth), innerHeight,true);
+        this.hue = random(255);
+        this.firework = new Particle(
+            random(innerWidth),
+            innerHeight,
+            this.hue,
+            true
+        );
         this.exploded = false;
         this.particles = [];
     }
@@ -14,26 +20,31 @@ class Firework {
                 this.explode();
             }
         }
-        for (let i = this.particles.length -1; i >= 0; i--) {
-            this.particles[i].applyForce(gravity)
-            this.particles[i].update()
-            if(this.particles[i].done()){
-                this.particles.splice(i,1)
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+            this.particles[i].applyForce(gravity);
+            this.particles[i].update();
+            if (this.particles[i].done()) {
+                this.particles.splice(i, 1);
             }
         }
     }
 
-    done(){
-        if(this.exploded && this.particles.length == 0){
-            return true
-        }else{
-            return false
+    done() {
+        if (this.exploded && this.particles.length == 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     explode() {
         for (let i = 0; i < 20; i++) {
-            let pos = new Particle(this.firework.pos.x, this.firework.pos.y,false);
+            let pos = new Particle(
+                this.firework.pos.x,
+                this.firework.pos.y,
+                this.hue,
+                false
+            );
             this.particles.push(pos);
         }
     }
@@ -43,7 +54,7 @@ class Firework {
             this.firework.show();
         }
         for (let i = 0; i < this.particles.length; i++) {
-            this.particles[i].show()
+            this.particles[i].show();
         }
     }
 }

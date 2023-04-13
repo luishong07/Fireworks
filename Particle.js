@@ -1,22 +1,19 @@
 class Particle{
-    constructor(x,y,firework){
+    constructor(x,y,hue,firework){
         this.firework = firework
         this.pos = createVector(x,y)
         this.lifespan = 255
         if(this.firework){
-            this.vel = createVector(0,random(-15,-10))
+            this.vel = createVector(random(-1,1),random(-20,-15))
         }else{
             this.vel = p5.Vector.random2D()
-            this.vel.mult(random(2,6))
+            this.vel.mult(random(6,10))
         }
-        // this.vel = createVector(0,random(-15,-10))
-
         this.acc = createVector(0,0)
+        this.hue = hue
     }
 
-
     applyForce(force){
-
         this.acc.add(force)
     }
 
@@ -36,17 +33,16 @@ class Particle{
         }else{
             return false
         }
-
     }
 
     show(){
+        colorMode(HSB)
         if(!this.firework){
             strokeWeight(2)
-            stroke(255,this.lifespan)
-            
+            stroke(this.hue,255,255,this.lifespan)
         }else{
             strokeWeight(2)
-            stroke(255)
+            stroke(this.hue,255,255)
         }
         point(this.pos.x, this.pos.y)
     }

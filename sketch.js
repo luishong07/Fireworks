@@ -3,11 +3,14 @@ let gravity
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	colorMode(HSB)
 	gravity = createVector(0,0.2)
+	background(0)
 }
 
 function draw() {
-	background('black')
+	colorMode(RGB)
+	background(0,0,0,35)
 	stroke(255)
 	strokeWeight(4)
 	// stroke('white')
